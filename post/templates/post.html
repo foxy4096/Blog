@@ -1,0 +1,33 @@
+{% extends 'base.html' %}
+
+{% block head %}
+{{post.title}}
+{% endblock head %}
+
+
+{% block content %}
+<div class="container">
+  <h1>{{post.title}}</h1>
+  by <a href="{% url 'user' post.author.id %}">{{post.author}}</a> on {{post.pub_date}}
+  <p>{{post.content}}</p>
+  <hr>
+  <h3>Comments:</h3>
+  <form action="" method="post">
+    {% csrf_token %}
+    {{form.as_p}}
+    <button type="submit" class="primary">Submit</button>
+  </form>
+  {% for comment in post.comments.all %}
+  <div class="comments" style="padding: 10px;">
+    <p class="font-weight-bold">
+      {{ comment.name }}
+      <span class=" text-muted font-weight-normal">
+        {{ comment.created_on }}
+      </span>
+    </p>
+    {{ comment.body | linebreaks }}
+  </div>
+  {% endfor %}
+
+</div>
+{% endblock content %}
