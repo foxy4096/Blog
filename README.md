@@ -31,7 +31,7 @@ Step 5. Now type
 ```
 python manage.py makemigrations
 # and
-python manange.py migrate
+python manage.py migrate
 ```
 Step 6. Now go type this command to create a new superuser
 ```
