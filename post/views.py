@@ -106,6 +106,11 @@ def delete_post(request):
 
 @login_required(login_url='login')
 def edit_user(request):
+    if request.method == "POST":
+        form = UserUpdateForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            return redirect('user', request.user.id)
     form = UserUpdateForm(instance=request.user)
     context = {
         'form': form
